@@ -12,6 +12,10 @@ module.exports = {
                 browsers: ['last 2 versions']
               }
             }]
+          ],
+          plugins: [
+            ["@babel/plugin-proposal-decorators", { "legacy": true }],
+            ["@babel/plugin-proposal-class-properties", { "loose" : true }]
           ]
         }
       }
