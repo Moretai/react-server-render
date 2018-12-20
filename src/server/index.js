@@ -1,8 +1,10 @@
 import React from 'react'
-import Home from './containers/Home'
+
 import { renderToString } from 'react-dom/server'
-var express = require('express')
-var app = express()
+import express from 'express'
+import Home from '../containers/Home'
+
+const app = express()
 
 app.use(express.static('public'))
 
