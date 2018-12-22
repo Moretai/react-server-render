@@ -21,9 +21,7 @@ page. server response only once.
 6. 客户端渲染出store中list数据对应的列表内容
 ```
 
-### Warning
-
-#### client stroe 和 server store 的统一
+### client stroe 和 server store 的统一
 
 ```js
 数据的脱水(Dehydrate)和注水(Rehydrate)
@@ -33,4 +31,18 @@ page. server response only once.
 
 1. 避免没必要的请求
 2. 保证两端的结果一致，网页不会闪动
+```
+
+### 使用Node作为数据获取中间层
+
+- 数据代理转发
+- cookie登陆状态传递
+- axios实例等概念。
+
+```js
+
+1.store 分为clientStore 和 serverStore
+2. redux-thunk 绑定额外的API传入不同axios的实例
+3. in node server, http-proxy 代理转发。
+
 ```
