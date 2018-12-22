@@ -3,6 +3,8 @@ import Header from '../../components/Header'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getHomeList } from './store/actions'
+import style from  './style.css'
+import { log } from 'core-js';
 
 // 同构 一套react代码，在服务端执行一次， 再客户端再执行一次
 
@@ -22,6 +24,13 @@ export default class Home extends React.Component {
     super(props)
   }
 
+  componentWillMount() {
+    if (style._getCss) {
+      console.log(style._getCss())
+    }
+    // console.log(style._getCss())
+  }
+
   componentDidMount() {
     this.props.getHomeList()
   }
@@ -30,7 +39,7 @@ export default class Home extends React.Component {
     return (
       <div>
         <Header />
-        <h1>Home</h1>
+        <h1 className={style.hello}>Home</h1>
         <h1>name {this.props.name}</h1>
         {
           Array.isArray(this.props.list) && this.props.list.map((x, idx) => <h1 key={x.age}>{x.name} {x.age}</h1>)

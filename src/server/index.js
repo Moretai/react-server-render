@@ -10,6 +10,9 @@ app.use(express.static('public'))
 app.get('*', function(req, res) {
   const store = getStore()
   const matchedRoutes = matchRoutes(routes, req.path)
+  console.log('====================================');
+  console.log('matchedRoutes', matchedRoutes);
+  console.log('====================================');
 
   const promises = [];
   matchedRoutes.forEach(item => {
@@ -27,7 +30,18 @@ app.get('*', function(req, res) {
   // TODO: 每个接口加个promise.race(, timer) 设置时间。
 
   Promise.all(promises).then(() => {
-    res.send(render(req, store, routes))
+    const context = {}
+    const html = render(req, store, routes, context)
+    console.log('====================================');
+    console.log('server context', context);
+    console.log('====================================');
+
+    if (context.NotFound) {
+      console.log('404');
+      return res.status(404).send(html)
+    } else {
+      res.send(html)
+    }
   })
 })
 

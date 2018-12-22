@@ -62,3 +62,28 @@ renderRoutes(props.route.routes)
 ```js
 1. axios 实例写成 (req) => return instance 形式. instanceCreator. cookie pass flow: client -> node middle layer -> backend server
 ```
+
+### 301 && 404
+
+```js
+[404] <StaticRouter /> 组件挂载了 staticContext 这个变量。在**服务端渲染**是 NotFound组件componentWillMount中设置 
+this.props.staticContext.NotFound = true.(判断是服务端渲染还是客户端渲染) 然后node serve端可以知道context这个属性，从而返回浏览器404.
+解决的是 服务端返回200，但是前端自己js跳转路由的问题。
+
+[301] node server中， StaticRouter检测到有<Redirect />组件，但是这个只能运行在浏览器中，它只能返回一串信息,挂载到context下，然后node server
+根据结果做重定向
+```
+
+
+## Add Css in App
+
+### css basic
+```js
+
+1. webpack.client use 'style-loader', webpack.server use 'isomorphic-style-loader'.
+
+- 'isomorphic-style-loader'只是把className写入
+- 'style-loader' 比前者多一个注入到html的style标签里。
+
+Problem: 页面抖动。因为 css 是后由js去加载的。然后注入到html里。
+```

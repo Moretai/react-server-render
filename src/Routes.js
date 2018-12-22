@@ -2,6 +2,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import Home from './containers/Home'
 import Login from './containers/Login'
+import NotFound from './containers/NotFound'
 
 // export default (
 //   <div>
@@ -14,7 +15,7 @@ export default [
   {
     path: '/',
     component: Home,
-    // exact: true,
+    exact: true,
     loadData: Home.loadData,
     key:'home',
   },
@@ -23,5 +24,10 @@ export default [
     component: Login,
     exact: true,
     key:'login',
+  },
+  {
+    component: NotFound,
+    exact: true,
+    key: 'notfound'
   }
 ]

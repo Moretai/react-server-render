@@ -1,10 +1,11 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter, Route } from 'react-router-dom'
+import { renderRoutes } from 'react-router-config'
 import { Provider } from 'react-redux'
 
 
-export const render = (req, store, routes) => {
+export const render = (req, store, routes, context) => {
 
   // const store = getStore()
   // 在这里拿到数据并填充到store中
@@ -35,11 +36,9 @@ export const render = (req, store, routes) => {
     // console.log(store.getState())
     const content = renderToString((
       <Provider store={store}>
-        <StaticRouter location={req.path} context={{}}>
+        <StaticRouter location={req.path} context={context}>
           <div>
-            {routes.map(route => (
-              <Route {...route} />
-            ))}
+            {renderRoutes(routes)}
           </div>
         </StaticRouter>
       </Provider>
