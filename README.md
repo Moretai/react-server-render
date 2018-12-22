@@ -20,3 +20,17 @@ page. server response only once.
 5. store中的列表数据被更新
 6. 客户端渲染出store中list数据对应的列表内容
 ```
+
+### Warning
+
+#### client stroe 和 server store 的统一
+
+```js
+数据的脱水(Dehydrate)和注水(Rehydrate)
+
+服务器端渲染产出了HTML,但是交给浏览器网页不管有HTML,还需要有"脱水数据"。这样,
+当浏览器渲染的时候，可以直接根据"脱水数据"来渲染React组件,这个过程叫做"注水"。
+
+1. 避免没必要的请求
+2. 保证两端的结果一致，网页不会闪动
+```

@@ -11,8 +11,11 @@ const reducer = combineReducers({
 // }
 
 // 单例的话所有的用户都是一个store Oops Wrong
-const getStore = () => {
+export const getStore = () => {
   return createStore(reducer, applyMiddleware(thunk))
 }
 
-export default getStore
+export const getClientStore = () => {
+  const defaultState = window.context.state
+  return createStore(reducer, defaultState, applyMiddleware(thunk))
+}

@@ -1,10 +1,7 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter, Route } from 'react-router-dom'
-import { matchRoutes } from 'react-router-config'
-import routes from '../Routes'
 import { Provider } from 'react-redux'
-import getStore from '../store'
 
 
 export const render = (req, store, routes) => {
@@ -54,6 +51,11 @@ export const render = (req, store, routes) => {
         </head>
         <body>
           <div id="app">${content}</div>
+          <script>
+            window.context = {
+              state: ${JSON.stringify(store.getState())}
+            }
+          </script>
           <script src="/index.js"></script>
         </body>
       </html>
