@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import { getHomeList } from './store/actions'
 import style from  './style.css'
 import withStyle from '../../withStyle'
+import { Helmet } from "react-helmet"
 
 // 同构 一套react代码，在服务端执行一次， 再客户端再执行一次
 
@@ -44,6 +45,11 @@ export default class Home extends React.Component {
   render() {
     return (
       <div>
+          <Helmet>
+            <meta charSet="utf-8" />
+            <title>My SEO Title</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+          </Helmet>
         <Header staticContext={this.props.staticContext} />
         <h1 className={style.hello}>Home</h1>
         <h1>name {this.props.name}</h1>
