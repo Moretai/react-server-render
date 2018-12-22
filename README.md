@@ -46,3 +46,19 @@ page. server response only once.
 3. in node server, http-proxy 代理转发。
 
 ```
+
+### 嵌套路由
+
+```js
+
+import renderRoutes from 'react-router-config'
+renderRoutes(props.route.routes)
+// both client and server
+
+```
+
+### 代理cookie
+
+```js
+1. axios 实例写成 (req) => return instance 形式. instanceCreator. cookie pass flow: client -> node middle layer -> backend server
+```
