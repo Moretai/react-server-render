@@ -30,13 +30,17 @@ app.get('*', function(req, res) {
   // TODO: 每个接口加个promise.race(, timer) 设置时间。
 
   Promise.all(promises).then(() => {
-    const context = {}
+    const context = {
+      css: []
+    }
     const html = render(req, store, routes, context)
     console.log('====================================');
     console.log('server context', context);
     console.log('====================================');
 
-    if (context.NotFound) {
+    if (context.action === "REPLACE") {
+      res.status(301, context.url)
+    } else if (context.NotFound) {
       console.log('404');
       return res.status(404).send(html)
     } else {

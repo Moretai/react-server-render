@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getHomeList } from './store/actions'
 import style from  './style.css'
-import { log } from 'core-js';
+import withStyle from '../../withStyle'
 
 // 同构 一套react代码，在服务端执行一次， 再客户端再执行一次
 
@@ -19,17 +19,23 @@ import { log } from 'core-js';
     }
   })
 )
+@withStyle(style)
 export default class Home extends React.Component {
   constructor(props) {
     super(props)
   }
 
-  componentWillMount() {
-    if (style._getCss) {
-      console.log(style._getCss())
-    }
-    // console.log(style._getCss())
-  }
+  // componentWillMount() {
+  //   if (this.props.staticContext) {
+  //     this.props.staticContext.css.push(style._getCss())
+  //   }
+  // }
+
+  // componentWillMount() {
+  //   console.log('====================================');
+  //   console.log('Home 你妈逼你结婚了吗？');
+  //   console.log('====================================');
+  // }
 
   componentDidMount() {
     this.props.getHomeList()
@@ -38,7 +44,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header staticContext={this.props.staticContext} />
         <h1 className={style.hello}>Home</h1>
         <h1>name {this.props.name}</h1>
         {

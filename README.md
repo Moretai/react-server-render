@@ -87,3 +87,68 @@ this.props.staticContext.NotFound = true.(判断是服务端渲染还是客户�
 
 Problem: 页面抖动。因为 css 是后由js去加载的。然后注入到html里。
 ```
+
+### basic slove
+
+```js
+1.  componentWillMount() {
+      if (this.props.staticContext) {
+        this.props.staticContext.css = style._getCss()
+      }
+    }
+
+2. 在node server里面拿到 css string。直接拼在模板里。
+
+```
+
+
+### 多样式整合
+
+```js
+Reason: StaticRouter 只会把staticContext传给路由组件，而不是所有组件。(比如 component <Header />没有)
+
+所有非路由组件必须要传递 staticContext 属性。而且都在componentWillMount中, 可以写一个 cssComponent, 然后extends cssComponent.
+
+
+// HOC
+import React, { Component } from 'react'
+
+export default (styles) => (DecoratedComponent) => {
+  return class NewComponent extends Component {
+    componentWillMount() {
+      if (this.props.staticContext) {
+        this.props.staticContext.css.push(styles._getCss())
+      }
+    }
+
+    render() {
+      return <DecoratedComponent {...this.props} />
+    }
+  }
+}
+
+// HOC lifecycle
+
+@exampleHoc // UPPER HOC
+@withStyle(style)
+export default class Header extends React.Component {
+  ...
+}
+
+UPPER HOC render
+HOC render
+Header render
+Header componentDidMount
+HOC componentDidMount
+UPPER HOC componentDidMount
+
+```
+
+
+
+### Tips
+
+```js
+组件的loadData方法， connect 帮我们挂载了一下。最好写成 导出的组件 的静态方法。
+
+```

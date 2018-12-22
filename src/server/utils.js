@@ -43,10 +43,20 @@ export const render = (req, store, routes, context) => {
         </StaticRouter>
       </Provider>
     ))
+
+    // const cssStr = context.css ? context.css : ''
+    // console.log('====================================');
+    // console.log('context.css:', context.css);
+    // console.log('====================================');
+
+    const cssStr = context.css.length ? context.css.join('\n') : ''
+    
+
     return `
       <html>
         <head>
           <title>SSR</title>
+          <style>${cssStr}</style>
         </head>
         <body>
           <div id="app">${content}</div>
