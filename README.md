@@ -150,7 +150,11 @@ UPPER HOC componentDidMount
 ```js
 
  'react-helmet'
- 
+
+ 'prerender':
+  // 自己打开无头浏览器，给蜘蛛看。用nginx代理区分是User 还是  🕷
+  Node server that uses Headless Chrome to render a javascript-rendered page as HTML. To be used in conjunction with prerender middleware.
+
 ```
 
 
